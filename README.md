@@ -12,9 +12,22 @@ The end result is a video with the ArUco markers removed and the inpainted conte
 **Demo Example:**
 
 - **Input Video:** `/video/demo_input.mp4`
-- **Output Video:** `/video/demo_output.gif`
+- **Output Video:** `/video/demo_output.gif` (animated for quick visualization)
 
-_Note:_ Although the primary supported input format is MP4, the demo output is shown as a GIF for quick visualization. Adjust your processing settings accordingly if you need a different output format.
+## Demo
+
+### Input Video
+
+<video width="640" height="360" controls>
+  <source src="video/demo_input.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### Processed Output (Animated)
+
+<img src="video/demo_output.gif" alt="Processed Output Demo" width="640" />
+
+_Note:_ The input is provided as an MP4 video, while the processed output is showcased as an animated GIF for quick visualization. You can adjust the output format in the application if needed.
 
 ## Features
 
@@ -56,6 +69,47 @@ _Note:_ Although the primary supported input format is MP4, the demo output is s
    - Warp and blend the best patch into the corresponding region in each frame.
 7. **Video Encoding:**
    - Combine the processed frames back into an MP4 video at 25 FPS (or output as a GIF for demo purposes).
+
+## Configuration and Constants
+
+All fixed parameters and paths are defined in the `constants.py` file. Below is a brief description of each parameter:
+
+- **CROP_SIZE = 512:**  
+  The dimension (in pixels) for cropping candidate patches. Determines the size of the inpaint region.
+
+- **EXPANSION_FACTOR = 0.8:**  
+  A factor used to expand the cropped region around the detected marker, ensuring enough context is included for effective inpainting.
+
+- **GUIDANCE_SCALE = 7.5:**  
+  A scale factor that influences the diffusion model's guidance during inpainting. Higher values can enforce stronger adherence to the prompt (if provided).
+
+- **NUM_INFERENCE_STEPS = 21:**  
+  The number of inference steps used by the inpainting model. More steps generally result in higher quality inpainting but increase computation time.
+
+- **STRENGTH = 0.99:**  
+  Controls the degree of modification during inpainting. A value close to 1 indicates a strong inpainting effect.
+
+- **INPUT_VIDEO:**  
+  Path to the input video file.  
+  Default: `/teamspace/studios/this_studio/4_aruco_moving_stairs.mp4`
+
+- **OUTPUT_VIDEO:**  
+  Path to the output video file.  
+  Default: `out_v1.1_aruco_moving_stairs.mp4`
+
+- **CROP_PERCENTAGE = 0.5:**  
+  The percentage of the region to crop for candidate patch extraction. This helps fine-tune the area used for inpainting.
+
+### Fixed Parameters for BIRCH Clustering
+
+- **N_CLUSTERS = 3:**  
+  The number of clusters used in the BIRCH clustering algorithm for grouping candidate patches.
+
+- **BIRCH_THRESHOLD = 0.2:**  
+  Threshold value that affects the sensitivity of the clustering process, determining when data points should be merged into clusters.
+
+- **BIRCH_BRANCHING_FACTOR = 20:**  
+  The branching factor parameter that controls the maximum number of subclusters during the clustering process.
 
 ## Installation & Requirements
 
@@ -115,5 +169,5 @@ transformers>=4.30.0
 5. **Run the Application:**
    - The main script handles video reading, processing, and writing. For example:
      ```bash
-     python main.py --input_video /video/demo_input.mp4 --output_video /video/demo_output.gif
+     python main.py --input_video /teamspace/studios/this_studio/4_aruco_moving_stairs.mp4 --output_video out_v1.1_aruco_moving_stairs.mp4
      ```
