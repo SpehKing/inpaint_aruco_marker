@@ -4,3 +4,4 @@ diffusers>=0.20.0
 opencv-contrib-python>=4.8.0.76
 numpy>=1.23.0
 transformers>=4.30.0
+accelerate
