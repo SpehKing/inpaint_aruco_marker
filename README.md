@@ -165,9 +165,10 @@ transformers>=4.30.0
 4. **Download/Setup Model Weights:**
 
    - The inpainting model is loaded from Hugging Face (`benjamin-paine/stable-diffusion-v1-5-inpainting`). Ensure you have the necessary access if required.
+   - login to huggingface using huggingface-cli login and paste your token obtained from the huggingface account, select no if asked to create a github token
 
 5. **Run the Application:**
    - The main script handles video reading, processing, and writing. For example:
      ```bash
-     python main.py --input_video /teamspace/studios/this_studio/4_aruco_moving_stairs.mp4 --output_video out_v1.1_aruco_moving_stairs.mp4
+     python main.py
      ```
