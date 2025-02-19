@@ -1,0 +1,6 @@
+# Python version: 3.12.8
+torch>=2.0.1
+diffusers>=0.20.0
+opencv-contrib-python>=4.8.0.76
+numpy>=1.23.0
+transformers>=4.30.0
